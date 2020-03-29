@@ -26,6 +26,7 @@ public class ArrayRotation {
       }
       System.out.println(Arrays.toString(array));
       
+      
       //Approcah 2 - Array Juggling - time O(n) space O(1)
       int g=gcd(elemCount,rotateBy);
       for(int i=0;i<g;i++)
@@ -43,6 +44,28 @@ public class ArrayRotation {
       }
       System.out.println(Arrays.toString(array));
       
+      //Approach 3 - Block Swap
+      int i=rotateBy;
+      int j=elemCount-rotateBy;
+      int d=rotateBy;
+      if(i!=0 && i!=elemCount)
+      {
+          while(i!=j)
+          {
+            if(i<j)
+            {
+                swap(array,d-i,d+j-i,i);
+                j-=i;
+            }
+            else
+            {
+                swap(array,d-i,d,j);
+                i-=j;
+            }
+          }
+          swap(array,d-i,d+j-i,i);
+      }
+      System.out.println(Arrays.toString(array));
        
     }
     
@@ -56,6 +79,16 @@ public class ArrayRotation {
             rem=first%second;
         }
         return second;
+    }
+    
+    static void swap(int array[], int start1, int start2, int count)
+    {
+        for (int i=0;i<count;i++)
+        {
+            int temp=array[start1+i];
+            array[start1+i]=array[start2+i];
+            array[start2+i]=temp;
+        }
         
     }
 }
