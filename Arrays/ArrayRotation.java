@@ -26,8 +26,36 @@ public class ArrayRotation {
       }
       System.out.println(Arrays.toString(array));
       
+      //Approcah 2 - Array Juggling - time O(n) space O(1)
+      int g=gcd(elemCount,rotateBy);
+      for(int i=0;i<g;i++)
+      {
+          int val=array[i];
+          int j=i;
+          int k=(j+rotateBy)%elemCount;
+          while(i!=k)
+          {
+                array[j]=array[k] ; 
+                j=k;
+                k=(j+rotateBy)%elemCount;
+          }
+          array[j]=val;
+      }
+      System.out.println(Arrays.toString(array));
       
-      //Approcah 2
-      
+       
+    }
+    
+    static int gcd(int first,int second)
+    {
+        int rem=first%second;
+        while(rem!=0)
+        {
+            first=second;
+            second=rem;
+            rem=first%second;
+        }
+        return second;
+        
     }
 }
